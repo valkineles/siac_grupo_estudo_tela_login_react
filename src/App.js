@@ -7,7 +7,7 @@ import React from 'react';
 import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import { FiLogIn } from 'react-icons/fi';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   app: {
     height: '100vh',
     display: 'flex',
@@ -28,22 +28,44 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: 600,
     color: '#c4c8cc',
-  },
-  margin: {
-    margin: theme.spacing(1),
+    marginTop: '10px',
+    marginBottom: '30px',
   },
   textField: {
     width: '50ch',
-  },
-  button: {
-    margin: theme.spacing(1),
-    width: '400px',
+    marginTop: '4px',
+    marginBottom: '4px',
   },
   redesSociais: {
-    textAlign: 'center',
-    fontWeight: 600,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '20px',
+    marginBottom: '20px',
   },
-}));
+  GoogleIcon: {
+    color: '#db3236',
+  },
+  FaceIcon: {
+    color: '#4267B2',
+  },
+  GitIcon: {
+    color: '#000',
+  },
+  TwitterIcon: {
+    color: '#1DA1F2',
+  },
+  Login: {
+    backgroundColor: '#2e43ac',
+    marginTop: '30px',
+    marginBottom: '10px',    
+  },
+  rodape: {
+    marginTop: '10px',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+});
 function App() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -64,25 +86,39 @@ function App() {
   };
   return (
     <div className={classes.app}>
-      <Paper elevation={2} className={classes.paper}>
+      <Paper elevation={4} className={classes.paper}>
         <h1 className={classes.titulo}>Login</h1>
+        
         <Typography variant="h6" className={classes.subTitulo}>
           login com redes sociais
         </Typography>
-        <Typography classeName={classes.subTitulo}>
-          <FaGoogle color="red" />
-          <FaFacebookF color="blue" />
-          <FaGithub color="primary" />
-          <FaTwitter color="blue" />
+        <div className={classes.redesSociais}>
+          <IconButton className={classes.GoogleIcon}>
+            <FaGoogle />
+          </IconButton>
+
+          <IconButton className={classes.FaceIcon}>
+            <FaFacebookF />
+          </IconButton>
+
+          <IconButton className={classes.GitIcon}>
+            <FaGithub />
+          </IconButton>
+
+          <IconButton className={classes.TwitterIcon}>
+            <FaTwitter />
+          </IconButton>
+        </div>
+
+        <Typography className={classes.subTitulo}>
+          ou login com email e senha
         </Typography>
-
-        <Typography variant="h6" classeName={classes.redesSociais}>ou login com email e senha</Typography>
-
-        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+        
+        <FormControl className={ classes.textField} variant="outlined">
           <TextField id="outlined-basic" label="Endereço de Email*" variant="outlined" />
         </FormControl>
 
-        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+        <FormControl className={classes.textField} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Senha*</InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -103,20 +139,15 @@ function App() {
             }
             labelWidth={70}
           />
-        </FormControl>
-        <div>
-          <Button variant="contained" color="primary" className={classes.button}>
+          <Button className={classes.Login}>
             <FiLogIn />
             LOGIN
           </Button>
+        <div className={classes.rodape}>
+          Não possui uma conta? <Link to="/">Cadastre-se</Link>
+          <Link to="/">Esqueci minha senha</Link>
         </div>
-        <div>
-          <h5>
-            Não possui uma conta?
-            <Link to="/">Cadastre-se</Link>
-            <Link to="/">Esqueci minha senha</Link>
-          </h5>
-        </div>
+        </FormControl>
       </Paper>
     </div>
   );
