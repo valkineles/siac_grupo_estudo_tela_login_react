@@ -2,7 +2,6 @@ import { Button, FormControl, IconButton, InputAdornment, InputLabel, Link, Outl
 import { makeStyles } from '@material-ui/core/styles';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import clsx from 'clsx';
 import React from 'react';
 import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import { FiLogIn } from 'react-icons/fi';
@@ -58,7 +57,8 @@ const useStyles = makeStyles({
   Login: {
     backgroundColor: '#2e43ac',
     marginTop: '30px',
-    marginBottom: '10px',    
+    marginBottom: '10px',
+    color: '#fff',
   },
   rodape: {
     marginTop: '10px',
@@ -72,6 +72,8 @@ function App() {
     amount: '',
     password: '',
     weight: '',
+    weightRange: '',
+    weightRange: '',
     weightRange: '',
     showPassword: false,
   });
@@ -88,7 +90,7 @@ function App() {
     <div className={classes.app}>
       <Paper elevation={4} className={classes.paper}>
         <h1 className={classes.titulo}>Login</h1>
-        
+
         <Typography variant="h6" className={classes.subTitulo}>
           login com redes sociais
         </Typography>
@@ -110,11 +112,9 @@ function App() {
           </IconButton>
         </div>
 
-        <Typography className={classes.subTitulo}>
-          ou login com email e senha
-        </Typography>
-        
-        <FormControl className={ classes.textField} variant="outlined">
+        <Typography className={classes.subTitulo}>ou login com email e senha</Typography>
+
+        <FormControl className={classes.textField} variant="outlined">
           <TextField id="outlined-basic" label="Endereço de Email*" variant="outlined" />
         </FormControl>
 
@@ -140,13 +140,14 @@ function App() {
             labelWidth={70}
           />
           <Button className={classes.Login}>
-            <FiLogIn />
+              <FiLogIn />  
             LOGIN
           </Button>
-        <div className={classes.rodape}>
-          Não possui uma conta? <Link to="/">Cadastre-se</Link>
-          <Link to="/">Esqueci minha senha</Link>
-        </div>
+          <div className={classes.rodape}>
+            Não possui uma conta?
+            <a href="/">Cadastre-se</a>
+            <a href="/">Esqueci minha senha</a>
+          </div>
         </FormControl>
       </Paper>
     </div>
