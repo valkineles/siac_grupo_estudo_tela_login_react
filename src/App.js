@@ -1,4 +1,4 @@
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, Link, OutlinedInput, Paper, TextField, Typography } from '@material-ui/core';
+import { Button, IconButton, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -6,86 +6,58 @@ import React from 'react';
 import { FaFacebookF, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import { FiLogIn } from 'react-icons/fi';
 
+
 const useStyles = makeStyles({
   app: {
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+   },
   paper: {
     flexBasis: 450,
-    padding: '15px',
+    padding: '20px'
   },
   titulo: {
     marginBottom: 0,
     fontSize: '50px',
     fontWeight: 300,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   subTitulo: {
     textAlign: 'center',
-    fontWeight: 600,
-    color: '#c4c8cc',
-    marginTop: '10px',
-    marginBottom: '30px',
+    fontWeight: 300,
+    color: '#c4c8c6',
+    fontSize: '15px',
+    marginTop: 0,
+    marginBottom: '15px'
   },
   textField: {
-    width: '50ch',
-    marginTop: '4px',
-    marginBottom: '4px',
+    margin: '5px 0'
   },
   redesSociais: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '20px',
-    marginBottom: '20px',
-  },
-  GoogleIcon: {
-    color: '#db3236',
-  },
-  FaceIcon: {
-    color: '#4267B2',
-  },
-  GitIcon: {
-    color: '#000',
-  },
-  TwitterIcon: {
-    color: '#1DA1F2',
+    margin: '20px 0'
   },
   Login: {
-    backgroundColor: '#2e43ac',
-    marginTop: '30px',
-    marginBottom: '10px',
-    color: '#fff',
+    margin: '30px 0'
   },
   rodape: {
-    marginTop: '10px',
     display: 'flex',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-between'
+  }
 });
 function App() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    weightRange: '',
-    weightRange: '',
-    showPassword: false,
+    showPassword: false
   });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setValues({ showPassword: !values.showPassword });
   };
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+
   return (
     <div className={classes.app}>
       <Paper elevation={4} className={classes.paper}>
@@ -95,60 +67,70 @@ function App() {
           login com redes sociais
         </Typography>
         <div className={classes.redesSociais}>
-          <IconButton className={classes.GoogleIcon}>
-            <FaGoogle />
+          <IconButton>
+            <FaGoogle color="#db3236" />
           </IconButton>
 
-          <IconButton className={classes.FaceIcon}>
-            <FaFacebookF />
+          <IconButton>
+            <FaFacebookF color="#4267B2" />
           </IconButton>
 
-          <IconButton className={classes.GitIcon}>
-            <FaGithub />
+          <IconButton>
+            <FaGithub color="#333" />
           </IconButton>
 
-          <IconButton className={classes.TwitterIcon}>
-            <FaTwitter />
+          <IconButton>
+            <FaTwitter color="#1DA1F2" />
           </IconButton>
         </div>
 
-        <Typography className={classes.subTitulo}>ou login com email e senha</Typography>
+        <Typography className={classes.subTitulo}>
+          ou login com email e senha
+        </Typography>
 
-        <FormControl className={classes.textField} variant="outlined">
-          <TextField id="outlined-basic" label="Endereço de Email*" variant="outlined" />
-        </FormControl>
+        <TextField
+          fullWidth
+          className={classes.textField}
+          id="outlined-basic"
+          label="Endereço de Email"
+          variant="outlined"
+          required
+        />
 
-        <FormControl className={classes.textField} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Senha*</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
+        <TextField
+          fullWidth
+          className={classes.textField}
+          type={values.showPassword ? "text" : "password"}
+          label="Senha"
+          variant="outlined"
+          required
+          InputProps={{
+            endAdornment: (
               <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                <IconButton onClick={handleClickShowPassword} edge="end">
+                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-            labelWidth={70}
-          />
-          <Button className={classes.Login}>
-              <FiLogIn />  
-            LOGIN
-          </Button>
-          <div className={classes.rodape}>
-            Não possui uma conta?
-            <a href="/">Cadastre-se</a>
-            <a href="/">Esqueci minha senha</a>
-          </div>
-        </FormControl>
+            )
+          }}
+        />
+
+        <Button
+          className={classes.Login}
+          color="primary"
+          variant="contained"
+          fullWidth
+          startIcon={<FiLogIn />}
+        >
+          login
+        </Button>
+
+        <div className={classes.rodape}>
+          <span>
+            Não possui uma conta?<a href="/"> Cadastre-se </a>
+          </span>
+          <a href="/">Esqueci minha senha</a>
+        </div>
       </Paper>
     </div>
   );
